@@ -40,3 +40,36 @@ sudo chmod -R 755 /var/www/jira-frontend
 cd ~/jira_clone/client
 nano Dockerfile
 ---------------------
+#FROM node:16
+FROM node:14 AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+# Install the 'serve' package globally to serve the built app
+#RUN npm install -g serve
+
+#EXPOSE 8080
+
+# Command to start the app using 'serve'
+#CMD ["serve", "-s", "build", "-l", "8080"]
+
+#using nginx 
+FROM nginx:alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+---------------------------------------------------------
+ docker build -t react-app .
+docker run -d -p 8080:80 react-app
+http://localhost:8080/
