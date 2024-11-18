@@ -36,3 +36,7 @@ http://localhost
 sudo chown -R www-data:www-data /var/www/jira-frontend
 sudo chmod -R 755 /var/www/jira-frontend
 
+-------------------for the front-end deployment using docker--------------------
+cd ~/jira_clone/client
+nano Dockerfile
+---------------------
