@@ -32,3 +32,7 @@ sudo ln -s /etc/nginx/sites-available/jira-frontend /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 http://localhost
+
+sudo chown -R www-data:www-data /var/www/jira-frontend
+sudo chmod -R 755 /var/www/jira-frontend
+
